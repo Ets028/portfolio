@@ -41,7 +41,7 @@ export default function HeroSection() {
     },
     {
       name: "Email",
-      url: "mailto:elfriantrianas@gmail.com",
+      url: "mailto:elfriantrianas028@gmail.com",
       icon: <FaEnvelope className="text-xl" />,
     },
   ];

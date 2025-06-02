@@ -23,15 +23,15 @@ export default function ContactSection() {
     {
       icon: <FaEnvelope className="text-2xl" />,
       label: "Email",
-      value: "elfrian@example.com",
-      link: "mailto:elfrian@example.com",
+      value: "elfriantrianas028@gmail.com",
+      link: "mailto:elfriantrianas028@gmail.com",
       color: "from-blue-500 to-purple-500",
     },
     {
       icon: <FaInstagram className="text-2xl" />,
       label: "Instagram",
-      value: "@elfrian",
-      link: "https://instagram.com/elfrian",
+      value: "@elfrian028_",
+      link: "https://instagram.com/elfrian028_",
       color: "from-pink-500 to-purple-500",
     },
     {

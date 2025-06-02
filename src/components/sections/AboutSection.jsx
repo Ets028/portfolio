@@ -395,7 +395,7 @@ export default function AboutSection() {
                 transition={{ delay: 0.6 }}
               >
                 <motion.a
-                  href="mailto:your.email@example.com"
+                  href="mailto:elfriantrianas028@gmail.com"
                   className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
                   whileHover={{
                     scale: 1.05,
