@@ -4,7 +4,6 @@ import {
   ArrowLeft,
   ExternalLink,
   Github,
-  Play,
   Star,
   Calendar,
   Code,
@@ -22,7 +21,12 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
 
+  // Debug: Log untuk memastikan data tersedia
+  console.log("Project ID:", id);
+  console.log("All projects:", projects);
+
   const project = projects.find((p) => p.id === parseInt(id));
+  console.log("Found project:", project);
 
   if (!project) {
     return (
@@ -64,17 +68,72 @@ const ProjectDetails = () => {
     { id: "solutions", label: "Solutions", icon: Lightbulb },
   ];
 
+  // Handle external link clicks dengan logging yang lebih detail
+  const handleLiveDemoClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("=== LIVE DEMO CLICK DEBUG ===");
+    console.log("Event:", e);
+    console.log("Project:", project);
+    console.log("Live URL:", project?.liveUrl);
+    console.log("Project keys:", Object.keys(project));
+
+    if (project?.liveUrl) {
+      console.log("Opening live demo URL:", project.liveUrl);
+      try {
+        // Test dengan window.location terlebih dahulu
+        window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+        console.log("Window.open called successfully");
+      } catch (error) {
+        console.error("Failed to open live demo:", error);
+        // Fallback ke window.location
+        window.location.href = project.liveUrl;
+      }
+    } else {
+      console.log("No live URL available");
+      alert("Live demo is not available for this project.");
+    }
+  };
+
+  const handleGithubClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    console.log("=== GITHUB CLICK DEBUG ===");
+    console.log("Event:", e);
+    console.log("Project:", project);
+    console.log("GitHub URL:", project?.githubUrl);
+
+    if (project?.githubUrl) {
+      console.log("Opening GitHub URL:", project.githubUrl);
+      try {
+        window.open(project.githubUrl, "_blank", "noopener,noreferrer");
+        console.log("Window.open called successfully");
+      } catch (error) {
+        console.error("Failed to open GitHub:", error);
+        window.location.href = project.githubUrl;
+      }
+    } else {
+      console.log("No GitHub URL available");
+      alert("GitHub repository is not available for this project.");
+    }
+  };
+
+  // Test function untuk memastikan onClick bekerja
+  const testClick = () => {
+    console.log("Test button clicked!");
+    alert("Test button works!");
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
+    <div className="min-h-screen from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-
         {/* Go Back Button */}
         <button
           onClick={goBack}
-          className="fixed top-6 left-6 z-50 group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+          className="fixed top-6 left-6 z-50 group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-full p-3 shadow-lg hover:scale-110 transition-transform"
         >
           <ArrowLeft className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
         </button>
@@ -102,7 +161,7 @@ const ProjectDetails = () => {
 
             {/* Description */}
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              {project.description.length > 200
+              {project.description?.length > 200
                 ? project.description.substring(0, 200) + "..."
                 : project.description}
             </p>
@@ -111,7 +170,7 @@ const ProjectDetails = () => {
             <div className="flex items-center justify-center gap-8 text-gray-600 dark:text-gray-400">
               <div className="flex items-center gap-2">
                 <Code className="w-5 h-5" />
-                <span>{project.technologies.length} Technologies</span>
+                <span>{project.technologies?.length || 0} Technologies</span>
               </div>
               {project.category === "fullstack" && (
                 <div className="flex items-center gap-2">
@@ -127,36 +186,51 @@ const ProjectDetails = () => {
 
             {/* Tech Stack */}
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-              {project.technologies.map((tech, index) => (
+              {project.technologies?.map((tech, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105"
+                  className="px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 rounded-xl text-sm font-medium border border-gray-200 dark:border-gray-700 hover:scale-105 transition-transform cursor-pointer"
                 >
                   {tech}
                 </span>
-              ))}
+              )) || []}
             </div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons - Simplified Version */}
             <div className="flex justify-center gap-4 pt-6">
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:shadow-xl hover:scale-105"
-              >
-                <ExternalLink className="w-5 h-5" />
-                Live Demo
-              </a>
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:shadow-xl hover:scale-105"
-              >
-                <Github className="w-5 h-5" />
-                View Code
-              </a>
+              {/* Live Demo Button */}
+              {project.liveUrl ? (
+                <button
+                  onClick={handleLiveDemoClick}
+                  className="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all duration-300 cursor-pointer"
+                  type="button"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Live Demo
+                </button>
+              ) : (
+                <div className="flex items-center gap-3 px-8 py-4 bg-gray-400 text-gray-200 rounded-xl font-medium cursor-not-allowed">
+                  <ExternalLink className="w-5 h-5" />
+                  Demo Unavailable
+                </div>
+              )}
+
+              {/* GitHub Button */}
+              {project.githubUrl ? (
+                <button
+                  onClick={handleGithubClick}
+                  className="flex items-center gap-3 px-8 py-4 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white rounded-xl font-medium transition-all duration-300 cursor-pointer"
+                  type="button"
+                >
+                  <Github className="w-5 h-5" />
+                  View Code
+                </button>
+              ) : (
+                <div className="flex items-center gap-3 px-8 py-4 bg-gray-400 text-gray-200 rounded-xl font-medium cursor-not-allowed">
+                  <Github className="w-5 h-5" />
+                  Code Unavailable
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -175,7 +249,7 @@ const ProjectDetails = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
                     activeTab === tab.id
-                      ? "bg-blue-600 text-white shadow-lg scale-105"
+                      ? "bg-blue-600 text-white shadow-lg"
                       : "text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
                 >
@@ -196,20 +270,8 @@ const ProjectDetails = () => {
               </h2>
               <div className="prose prose-gray dark:prose-invert max-w-none">
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg whitespace-pre-line">
-                  {project.details.overview}
+                  {project.details?.overview || "Overview not available"}
                 </p>
-                {project.description &&
-                  project.description.length >
-                    project.details.overview.length && (
-                    <div className="mt-6 p-6 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                        Detailed Description
-                      </h3>
-                      <div className="text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line">
-                        {project.description}
-                      </div>
-                    </div>
-                  )}
               </div>
             </div>
           )}
@@ -220,7 +282,7 @@ const ProjectDetails = () => {
                 Key Features
               </h2>
               <div className="grid md:grid-cols-2 gap-4">
-                {project.details.features.map((feature, index) => (
+                {project.details?.features?.map((feature, index) => (
                   <div
                     key={index}
                     className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -230,7 +292,7 @@ const ProjectDetails = () => {
                       {feature}
                     </span>
                   </div>
-                ))}
+                )) || <p className="text-gray-500">No features available</p>}
               </div>
             </div>
           )}
@@ -242,7 +304,7 @@ const ProjectDetails = () => {
               </h2>
               <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-6 rounded-r-lg">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {project.details.challenges}
+                  {project.details?.challenges || "Challenges not documented"}
                 </p>
               </div>
             </div>
@@ -255,80 +317,13 @@ const ProjectDetails = () => {
               </h2>
               <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-6 rounded-r-lg">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {project.details.solutions}
+                  {project.details?.solutions || "Solutions not documented"}
                 </p>
               </div>
             </div>
           )}
         </div>
-
-        {/* Additional Info Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Technologies
-              </h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              {project.category === "fullstack"
-                ? "Full-stack development with modern mobile and backend technologies."
-                : "Built with modern web technologies for optimal performance."}
-            </p>
-          </div>
-
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
-                {project.title.toLowerCase().includes("inventory") ? (
-                  <Shield className="w-5 h-5 text-green-600 dark:text-green-400" />
-                ) : (
-                  <Target className="w-5 h-5 text-green-600 dark:text-green-400" />
-                )}
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                {project.title.toLowerCase().includes("inventory")
-                  ? "Security"
-                  : "Performance"}
-              </h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              {project.title.toLowerCase().includes("inventory")
-                ? "Secure authentication and role-based access control for business operations."
-                : "Optimized for speed and efficiency with excellent user experience metrics."}
-            </p>
-          </div>
-
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
-                <Star className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white">
-                Quality
-              </h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              High-quality code with comprehensive functionality and best
-              practices implementation.
-            </p>
-          </div>
-        </div>
       </div>
-
-      <style jsx>{`
-        .bg-grid-pattern {
-          background-image: radial-gradient(
-            circle at 1px 1px,
-            rgba(255, 255, 255, 0.15) 1px,
-            transparent 0
-          );
-          background-size: 20px 20px;
-        }
-      `}</style>
     </div>
   );
 };

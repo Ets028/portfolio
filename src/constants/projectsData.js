@@ -1,3 +1,4 @@
+// src/constants/projectsData.js
 export const projects = [
   {
     id: 1,
@@ -40,28 +41,35 @@ This project showcases both frontend and backend skills, focusing on real-world 
   },
   {
     id: 2,
-    title: "Web Portfolio",
+    title: "Portfolio Website",
     description:
-      "A personal portfolio website built with ReactJS and Tailwind CSS.",
-    image: "/images/project1.jpg",
-    technologies: ["React", "Tailwind CSS"],
-    githubUrl: "https://github.com/ets028/portfolio",
-    liveUrl: "https://portfolio-ets.netlify.app",
+      "A modern, responsive portfolio website built with React and styled with Tailwind CSS. Features smooth animations, dark mode support, and optimized performance.",
     category: "fullstack",
-    featured: true,
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "Framer Motion",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+    ],
+    liveUrl: "https://portfolio-ets.netlify.app",
+    githubUrl: "https://github.com/ets028/portfolio",
     details: {
       overview:
-        "This portfolio showcases my skills in React and Tailwind CSS, with a focus on modern UI, dark mode, and animations.",
+        "This portfolio website showcases modern web development practices with a focus on user experience and performance. Built using React for component-based architecture and Tailwind CSS for utility-first styling.",
       features: [
-        "Responsive design",
-        "Dark mode toggle",
-        "Project cards with animations",
-        "Particle background effect",
+        "Responsive design that works on all devices",
+        "Dark mode toggle with system preference detection",
+        "Smooth page transitions and micro-animations",
+        "Optimized images and lazy loading",
+        "SEO-friendly structure and meta tags",
+        "Fast loading times and performance optimization",
       ],
       challenges:
-        "Implementing smooth animations and responsive design that works on both desktop and mobile.",
+        "The main challenges included creating smooth animations that don't impact performance, implementing a robust dark mode system, and ensuring cross-browser compatibility while maintaining clean, maintainable code.",
       solutions:
-        "Used React Spring for animations and Tailwind CSS for responsive utility classes.",
+        "Implemented Framer Motion for performant animations, used CSS custom properties for theme switching, and employed modern CSS techniques with Tailwind utilities for consistent styling across different browsers.",
     },
   },
   {
