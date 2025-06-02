@@ -7,15 +7,14 @@ const Footer = () => {
   const navigation = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
+    { name: "My Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
 
   const socialLinks = [
     {
       name: "GitHub",
-      href: "https://github.com",
+      href: "https://github.com/ets028",
       icon: <FaGithub size={20} />,
     },
     {
@@ -25,20 +24,14 @@ const Footer = () => {
     },
     {
       name: "Instagram",
-      href: "https://instagram.com",
+      href: "https://instagram.com/elfrian028_",
       icon: <FaInstagram size={20} />,
     },
     {
       name: "Mail",
-      href: "mailto:you@example.com",
+      href: "mailto:elfriantrianas028@gmail.com",
       icon: <FaEnvelope size={20} />,
     },
-  ];
-
-  const footerLinks = [
-    { name: "Privacy Policy", href: "#privacy" },
-    { name: "Terms of Service", href: "#terms" },
-    { name: "Sitemap", href: "#sitemap" },
   ];
 
   const scrollToSection = (event, href) => {
@@ -114,7 +107,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-6">
               More
             </h3>
@@ -130,13 +123,13 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className="border-t border-gray-200 dark:border-gray-700 py-6 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 md:mb-0">
-          © {currentYear} Your Name. All rights reserved.
+          © {currentYear} Elfrian. All rights reserved.
         </p>
         <button
           onClick={scrollToTop}

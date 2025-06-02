@@ -45,11 +45,6 @@ export default function App() {
 
       {/* Footer dan tombol toggle */}
       <Footer />
-      <DarkModeToggle
-        isDark={isDarkMode}
-        toggle={toggleDarkMode}
-        className="fixed bottom-6 right-6 z-50"
-      />
     </div>
   );
 }
