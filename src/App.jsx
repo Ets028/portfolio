@@ -35,7 +35,7 @@ export default function App() {
         <ParticlesBackground />
 
         {/* Konten utama */}
-        <div className="relative z-50">
+        <div className="relative z-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />

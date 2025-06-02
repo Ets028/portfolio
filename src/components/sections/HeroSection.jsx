@@ -202,7 +202,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative pt-40 px-4 overflow-hidden"
       style={{
         background: "rgba(255, 255, 255, 0.05)",
       }}
@@ -217,25 +217,19 @@ export default function HeroSection() {
 
       {/* Mobile Image */}
       <motion.div
-        className="absolute top-20 left-1/2 transform -translate-x-1/2 md:hidden z-20"
+        className="absolute top-16 left-[30%] transform -translate-x-[30%] z-10 md:hidden"
         initial={{ opacity: 0, y: -50, scale: 0.5 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="relative">
+        <div className="relative w-56 h-56 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl">
+          <img
+            src={profileImage}
+            alt="Elfrian Triana Setiawan"
+            className="w-full h-full object-cover"
+          />
           <motion.div
-            className="w-32 h-32 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl backdrop-blur-sm"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img
-              src={profileImage}
-              alt={`${name} - Profile`}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-          <motion.div
-            className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-gray-900"
+            className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-green-500 rounded-full border-4 border-white dark:border-gray-900"
             variants={pulseVariants}
             animate="animate"
           />
@@ -243,7 +237,7 @@ export default function HeroSection() {
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-0 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <motion.div
             className="text-center lg:text-left mt-20 md:mt-0"
@@ -251,26 +245,6 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
           >
-            <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-green-50/80 dark:bg-green-900/80 backdrop-blur-sm text-green-600 dark:text-green-300 text-sm font-medium mb-6"
-              variants={itemVariants}
-              animate={{
-                y: [0, -5, 0],
-                transition: {
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                },
-              }}
-            >
-              <motion.span
-                className="w-2 h-2 bg-green-500 rounded-full mr-2"
-                variants={pulseVariants}
-                animate="animate"
-              />
-              Available for work
-            </motion.div>
-
             <motion.h1
               className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 drop-shadow-lg"
               variants={itemVariants}
@@ -446,27 +420,6 @@ export default function HeroSection() {
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   />
-                </motion.div>
-
-                <motion.div
-                  className="absolute -top-2 -right-2 px-4 py-2 bg-green-500/90 backdrop-blur-sm text-white text-sm font-medium rounded-full shadow-lg"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <motion.div
-                    animate={{
-                      y: [0, -5, 0],
-                      transition: {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      },
-                    }}
-                  >
-                    Available for hire
-                  </motion.div>
                 </motion.div>
               </div>
             </div>
