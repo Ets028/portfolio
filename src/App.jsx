@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
+    <div>
       <main className="relative pt-20 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen transition-colors duration-300">
         {/* Partikel latar belakang */}
         <ParticlesBackground />
