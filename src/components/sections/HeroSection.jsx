@@ -202,7 +202,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative pt-40 px-4 overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative pt-10 px-4 overflow-hidden"
       style={{
         background: "rgba(255, 255, 255, 0.05)",
       }}
@@ -217,12 +217,12 @@ export default function HeroSection() {
 
       {/* Mobile Image */}
       <motion.div
-        className="absolute top-16 left-[30%] transform -translate-x-[30%] z-10 md:hidden"
+        className="absolute top-6 left-[32%] transform -translate-x-[50%] z-10 md:hidden"
         initial={{ opacity: 0, y: -50, scale: 0.5 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="relative w-56 h-56 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl">
+        <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-blue-500/30 shadow-2xl">
           <img
             src={profileImage}
             alt="Elfrian Triana Setiawan"
