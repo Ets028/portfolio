@@ -37,7 +37,7 @@ export default function ContactSection() {
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       label: "Location",
-      value: "Jakarta, Indonesia",
+      value: "Bogor, Indonesia",
       link: "#",
       color: "from-blue-600 to-cyan-500",
     },
